@@ -1,10 +1,24 @@
+import About from "./components/About";
+import Footer from "./components/Footer";
+import Projects from "./components/Projects";
 import Navbar from "./components/navbar";
 
 export default function Home() {
 
     return(
 
-      <Navbar/>
+      <main className="flex min-h-screen flex-col bg-white">
+              <Navbar/>
+
+              <div className="container mx-auto px-12 py-4">
+
+                <About/>
+                <Projects/>
+
+              </div>
+
+          </main>
+      
 
     );
 }

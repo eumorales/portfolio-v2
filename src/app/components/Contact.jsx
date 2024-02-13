@@ -14,10 +14,10 @@ const Contact = () => {
 
         <div className="flex">
           <a href="mailto:eu@gilbertomorales.com">
-            <img src="assets/email.svg" alt="Email" className='w-20 h-auto mr-4'/>
+            <img src="assets/email.svg" alt="Email" className='w-16 lg:w-20 h-auto mr-4'/>
           </a>
           <a href="https://github.com/eumorales" target="_blank">
-            <img src="assets/github.svg" alt="Github" className='w-20 h-auto'/>
+            <img src="assets/github.svg" alt="Github" className='w-16 lg:w-20 h-auto'/>
           </a>
         </div>
       </div>

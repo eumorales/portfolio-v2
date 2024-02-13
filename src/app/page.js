@@ -1,5 +1,6 @@
 import About from "./components/About";
 import Contact from "./components/Contact";
+import Footer from "./components/Footer";
 import Projects from "./components/Projects";
 import Navbar from "./components/navbar";
 
@@ -17,6 +18,8 @@ export default function Home() {
                 <Contact/>
 
               </div>
+
+              <Footer/>
 
         </main>
       

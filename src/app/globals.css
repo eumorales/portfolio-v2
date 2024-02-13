@@ -1,7 +1,6 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
 :root {
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
@@ -31,3 +30,12 @@ body {
     text-wrap: balance;
   }
 }
+
+html {
+  --scroll-behavior: smooth!important;
+  scroll-behavior: smooth!important;
+}
+
+
+
+

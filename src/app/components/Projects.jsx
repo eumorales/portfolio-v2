@@ -2,7 +2,7 @@ import React from 'react';
 
 const Projects = () => {
   return (
-    <div id="projetos" className="projeto-text flex flex-col items-center mt-20">
+    <div id="projetos" className="projeto-text flex flex-col items-center mt-20 mb-24">
       <h2 className="text-7xl text-black font-semibold mb-1">Some <b>projects</b></h2>
       <img id="sobre-img" src="assets/projetos.svg" alt="Sobre" className="transform scale-75" />
 

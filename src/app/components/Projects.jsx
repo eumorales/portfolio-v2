@@ -11,8 +11,8 @@ const Projects = () => {
           imageSrc="assets/portfolio-web.png"
           description="✨ This is my personal portfolio, where I showcase most of my projects."
           technologies={["Next JS", "React", "Tailwind CSS", "daisyUI"]}
-          websiteLink="https://cachorro.gilbertomorales.com"
-          githubLink="https://github.com/eumorales/dog"
+          websiteLink="https://gilbertomorales.com"
+          githubLink="https://github.com/eumorales/"
         />
 
         <ProjectCard
@@ -28,8 +28,8 @@ const Projects = () => {
           imageSrc="assets/linktree-web.png"
           description="🌳 The application consists of a simple link tree for personal use."
           technologies={["HTML", "CSS", "JavaScript"]}
-          websiteLink="https://cachorro.gilbertomorales.com"
-          githubLink="https://github.com/eumorales/dog"
+          websiteLink="https://linktree.gilbertomorales.com"
+          githubLink="https://github.com/eumorales/linktree"
         />
       </div>
     </div>

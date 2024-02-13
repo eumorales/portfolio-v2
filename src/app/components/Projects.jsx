@@ -3,8 +3,10 @@ import React from 'react';
 const Projects = () => {
   return (
     <div className="projeto-text flex flex-col items-center mt-20">
-      <h2 className="text-3xl font-semibold mb-8">Some projects</h2>
-      <img id="sobre-img" src="assets/projetos.svg" alt="Sobre" className="mb-8" />
+      <h2 className="text-7xl text-black font-semibold mb-1">Some <b>projects</b></h2>
+      <img id="sobre-img" src="assets/projetos.svg" alt="Sobre" className="transform scale-75" />
+
+
       
       <div className="projetos flex flex-wrap justify-center gap-6">
         <div className="projeto bg-white border border-gray-300 rounded-lg shadow-md p-6 max-w-xs">

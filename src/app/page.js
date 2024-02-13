@@ -1,5 +1,4 @@
 import About from "./components/About";
-import Footer from "./components/Footer";
 import Projects from "./components/Projects";
 import Navbar from "./components/navbar";
 
@@ -17,7 +16,7 @@ export default function Home() {
 
               </div>
 
-          </main>
+        </main>
       
 
     );

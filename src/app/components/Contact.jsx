@@ -5,7 +5,7 @@ const Contact = () => {
     <div id="contato" className="contato flex flex-col md:flex-row justify-between items-center mx-auto max-w-6xl mt-12 mb-20">
 
       <div className="md:mr-8">
-        <img id="contato-img" src="assets/contact.svg" alt="contato" className="w-64 md:w-auto h-auto" />
+        <img id="contato-img" src="assets/contact.svg" alt="contato" className="w-64 md:w-10/12 h-auto" />
       </div>
 
       <div className='mt-8 flex flex-col items-center md:items-start md:mt-40'>

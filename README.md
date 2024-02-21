@@ -11,8 +11,8 @@ This is my personal portfolio, where I showcase most of my projects.
 
 ## ✍ Languages used
 
-<img alt="CSS" src="https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB" /> <img alt="CSS" src="https://img.shields.io/badge/next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white" />
-<img alt="CSS" src="https://img.shields.io/badge/Tailwind CSS-3EAAAF?style=for-the-badge&logo=tailwind-css&logoColor=white" /> <img alt="CSS" src="https://img.shields.io/badge/daisyUI-168363?style=for-the-badge&logo=daisyUI&logoColor=white" />
+<img alt="React" src="https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB" /> <img alt="Next JS" src="https://img.shields.io/badge/next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white" />
+<img alt="Tailwind CSS" src="https://img.shields.io/badge/Tailwind CSS-1C64F2?style=for-the-badge&logo=tailwind-css&logoColor=white" /> <img alt="daisyUI" src="https://img.shields.io/badge/daisyUI-168363?style=for-the-badge&logo=daisy UI&logoColor=white" />
 
 	
 	

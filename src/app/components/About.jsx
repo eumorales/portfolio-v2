@@ -1,6 +1,8 @@
 'use client'
 import React from 'react';
 import { TypeAnimation } from 'react-type-animation';
+import DownloadCV from './CV';
+import CV from './CV';
 
 const About = () => {
   return (
@@ -22,9 +24,8 @@ const About = () => {
                         />
                         </strong></h1>
         <h4 className="text-xl mt-5 md:text-2xl text-black font-bold">Fullstack Developer</h4>
-        <p className="descricao mt-3 text-gray-400">"I'm a fullstack developer focused on website development, constantly seeking new ways to enhance my skills."</p>
-        <button className="mt-5 btn btn-outline">WIP</button> 
-        {/* Download CV */}
+        <p className="descricao mt-3 pr-2 md:pr-6 text-gray-400">"I'm a fullstack developer focused on website development, constantly seeking new ways to enhance my skills."</p>
+        <CV/>
 
       </div>
       <div className="md:w-2/3 mt-8 md:mt-0 order-first md:order-last">

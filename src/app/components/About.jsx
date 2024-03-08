@@ -1,7 +1,6 @@
 'use client'
 import React from 'react';
 import { TypeAnimation } from 'react-type-animation';
-import DownloadCV from './CV';
 import CV from './CV';
 
 const About = () => {

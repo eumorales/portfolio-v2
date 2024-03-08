@@ -49,8 +49,8 @@ const ProjectCard = ({ title, imageSrc, description, technologies, websiteLink, 
           ))}
         </div>
         <div className="flex justify-center space-x-4">
-          <a href={websiteLink} target="_blank" rel="noopener noreferrer" className="btn btn-outline btn-primary">Website</a>
-          <a href={githubLink} target="_blank" rel="noopener noreferrer" className="btn btn-outline btn-accent">View on GitHub</a>
+          <a href={websiteLink} target="_blank" rel="noopener noreferrer" className="btn btn-outline btn-info">Website</a>
+          <a href={githubLink} target="_blank" rel="noopener noreferrer" className="btn btn-outline btn-primary">View on GitHub</a>
         </div>
       </div>
     </div>

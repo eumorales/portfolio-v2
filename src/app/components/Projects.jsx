@@ -4,23 +4,25 @@ import { Fade } from 'react-awesome-reveal';
 
 const Projects = () => {
   return (
-
     <div id="projetos" className="mt-10 py-20 px-4">
       <Fade triggerOnce={true}>
-      <h2 className="text-5xl md:text-7xl text-black font-semibold mb-16 text-center">Some <b>projects</b></h2>
+        <h2 className="text-5xl md:text-7xl text-black font-semibold mb-16 text-center">Some <b>projects</b></h2>
       </Fade>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-
-      <Fade cascade damping={0.5}>
-        <ProjectCard
+        <Fade cascade damping={0.5}>
+          <ProjectCard
             title="Portfólio"
             imageSrc="assets/portfolio-web.png"
             description="✨ This is my personal portfolio, where I showcase most of my projects."
-            technologies={["Next JS", "React", "Tailwind CSS", "daisyUI"]}
+            technologies={[
+              { name: "Next JS", image: "icons/next.svg" },
+              { name: "React", image: "icons/react.svg" },
+              { name: "Tailwind CSS", image: "icons/tailwindcss.svg" },
+              { name: "daisyUI", image: "icons/daisyui.svg" },
+            ]}
             websiteLink="https://gilbertomorales.com"
             githubLink="https://github.com/eumorales/"
           />
-
           <ProjectCard
             title="Dog"
             imageSrc="assets/dog-web.png"
@@ -30,20 +32,28 @@ const Projects = () => {
                 Made with dog.ceo/api
               </>
             }
-            technologies={["HTML", "CSS", "JavaScript"]}
+            technologies={[
+              { name: "HTML", image: "icons/html.svg" },
+              { name: "CSS", image: "icons/css.svg" },
+              { name: "JavaScript", image: "icons/javascript.svg" }
+            ]}
             websiteLink="https://cachorro.gilbertomorales.com"
             githubLink="https://github.com/eumorales/dog"
           />
+
           <ProjectCard
             title="Linktree"
             imageSrc="assets/linktree-web.png"
             description="🌳 The application consists of a simple link tree for personal use."
-            technologies={["HTML", "CSS", "JavaScript"]}
+            technologies={[
+              { name: "HTML", image: "icons/html.svg" },
+              { name: "CSS", image: "icons/css.svg" },
+              { name: "JavaScript", image: "icons/javascript.svg" }
+            ]}
             websiteLink="https://linktree.gilbertomorales.com"
             githubLink="https://github.com/eumorales/linktree"
           />
         </Fade>
-
       </div>
     </div>
   );
@@ -58,7 +68,9 @@ const ProjectCard = ({ title, imageSrc, description, technologies, websiteLink, 
         <p className="text-gray-600 mb-8 text-center">{description}</p>
         <div className="flex flex-wrap justify-center mb-4">
           {technologies.map((tech, index) => (
-            <span key={index} className="bg-gray-200 text-gray-800 px-2 py-1 rounded-full text-sm mr-2 mb-2">{tech}</span>
+            <div key={index} className="flex items-center mr-2 mb-2">
+              <img src={tech.image} alt={tech.name} className="w-6 h-6 mr-2" />
+            </div>
           ))}
         </div>
         <div className="flex justify-center space-x-4">

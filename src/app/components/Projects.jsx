@@ -68,6 +68,20 @@ const Projects = () => {
             websiteLink="https://aacuf.com"
             githubLink="https://github.com/eumorales/aacuf"
           />
+          <ProjectCard
+            title="CS"
+            imageSrc="assets/cs.png"
+            description={
+              <>
+                ⏳
+              </>
+            }
+            technologies={[
+              { name: "CS", image: "icons/cs.svg" },
+            ]}
+            websiteLink="https:/gilbertomorales.com"
+            githubLink="https:/gilbertomorales.com"
+          />
         </Fade>
       </div>
     </div>

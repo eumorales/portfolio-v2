@@ -53,6 +53,21 @@ const Projects = () => {
             websiteLink="https://linktree.gilbertomorales.com"
             githubLink="https://github.com/eumorales/linktree"
           />
+          <ProjectCard
+            title="AACUF"
+            imageSrc="assets/aacuf-web.png"
+            description={
+              <>
+                🐧 Associação Atlética de Computação da Universidade Franciscana
+              </>
+            }
+            technologies={[
+              { name: "HTML", image: "icons/html.svg" },
+              { name: "CSS", image: "icons/css.svg" },
+            ]}
+            websiteLink="https://aacuf.com"
+            githubLink="https://github.com/eumorales/aacuf"
+          />
         </Fade>
       </div>
     </div>

@@ -9,7 +9,7 @@ const Projects = () => {
         <h2 className="text-5xl md:text-7xl text-black font-semibold mb-16 text-center">Some <b>projects</b></h2>
       </Fade>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        <Fade cascade damping={0.5} triggerOnce={true}>
+        <Fade cascade damping={0.2} triggerOnce={true}>
           <ProjectCard
             title="Portfólio"
             imageSrc="assets/portfolio-web.png"
@@ -69,11 +69,25 @@ const Projects = () => {
             githubLink="https://github.com/eumorales/aacuf"
           />
           <ProjectCard
-            title="CS"
+            title="Coming Soon"
             imageSrc="assets/cs.png"
             description={
               <>
-                ⏳
+                ⏳ A mystery project in development. Stay tuned to find out what's coming!
+              </>
+            }
+            technologies={[
+              { name: "CS", image: "icons/cs.svg" },
+            ]}
+            websiteLink="https:/gilbertomorales.com"
+            githubLink="https:/gilbertomorales.com"
+          />
+          <ProjectCard
+            title="Coming Soon"
+            imageSrc="assets/cs.png"
+            description={
+              <>
+                ⏳ A mystery project in development. Stay tuned to find out what's coming!
               </>
             }
             technologies={[

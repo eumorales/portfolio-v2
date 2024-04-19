@@ -79,8 +79,8 @@ const Projects = () => {
             technologies={[
               { name: "CS", image: "icons/cs.svg" },
             ]}
-            websiteLink="https:/gilbertomorales.com"
-            githubLink="https:/gilbertomorales.com"
+            websiteLink="https://gilbertomorales.com"
+            githubLink="https://gilbertomorales.com"
           />
           <ProjectCard
             title="Coming Soon"
@@ -93,8 +93,8 @@ const Projects = () => {
             technologies={[
               { name: "CS", image: "icons/cs.svg" },
             ]}
-            websiteLink="https:/gilbertomorales.com"
-            githubLink="https:/gilbertomorales.com"
+            websiteLink="https://gilbertomorales.com"
+            githubLink="https://gilbertomorales.com"
           />
         </Fade>
       </div>

@@ -103,8 +103,11 @@ const Projects = () => {
 };
 
 const ProjectCard = ({ title, imageSrc, description, technologies, websiteLink, githubLink }) => {
+
+  const comingSoon = title === "Coming Soon";
+
   return (
-    <div className="bg-white shadow-md rounded-lg overflow-hidden">
+    <div className={`bg-white shadow-md rounded-lg overflow-hidden ${comingSoon ? 'h-full' : ''}`}>
       <img src={imageSrc} alt={title} className="w-full h-64 object-cover object-center" />
       <div className="p-6">
         <h3 className="text-2xl text-black text-center font-semibold mb-4">{title}</h3>
@@ -116,10 +119,12 @@ const ProjectCard = ({ title, imageSrc, description, technologies, websiteLink, 
             </div>
           ))}
         </div>
-        <div className="flex justify-center space-x-4">
-          <a href={websiteLink} target="_blank" rel="noopener noreferrer" className="btn btn-outline btn-info">Website</a>
-          <a href={githubLink} target="_blank" rel="noopener noreferrer" className="btn btn-outline btn-primary">View on GitHub</a>
-        </div>
+        {!comingSoon && (
+          <div className="flex justify-center space-x-4">
+            <a href={websiteLink} target="_blank" rel="noopener noreferrer" className="btn btn-outline btn-info">Website</a>
+            <a href={githubLink} target="_blank" rel="noopener noreferrer" className="btn btn-outline btn-primary">View on GitHub</a>
+          </div>
+        )}
       </div>
     </div>
   );

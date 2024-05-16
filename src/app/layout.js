@@ -4,8 +4,8 @@ import "./globals.css";
 const poppins = Poppins({ subsets: ["latin"], weight: ["400", "500", "600", "700", "800", "900"]});
 
 export const metadata = {
-  title: "Gilberto Morales - Portfólio",
-  description: "Portfólio criado para divulgar projetos pessoais.",
+  title: "Portfólio | gilbertomorales.com",
+  description: "Portfólio com projetos pessoais disponíveis para visualização e código aberto.",
 };
 
 export default function RootLayout({ children }) {

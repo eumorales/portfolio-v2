@@ -1,5 +1,5 @@
 'use client'
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Fade } from 'react-awesome-reveal';
 import { CardBody, CardContainer, CardItem } from './ui/3d-card';
 import Link from "next/link";
@@ -39,11 +39,26 @@ const projetos = [
   },
 ];
 
-const EXIBIR_PROJETOS = 3;
+const EXIBIR_PROJETOS_MOBILE = 1;
+const EXIBIR_PROJETOS_DESKTOP = 3;
 
 export default function Projects() {
   const [paginaAtual, definirPaginaAtual] = useState(0);
+  const [isMobile, setIsMobile] = useState(false);
 
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    window.addEventListener('resize', handleResize);
+    handleResize(); // Call it initially to set the state based on the initial window size
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
+  const EXIBIR_PROJETOS = isMobile ? EXIBIR_PROJETOS_MOBILE : EXIBIR_PROJETOS_DESKTOP;
   const totalPaginas = Math.ceil(projetos.length / EXIBIR_PROJETOS);
   const projetoAtual = projetos.slice(paginaAtual * EXIBIR_PROJETOS, (paginaAtual + 1) * EXIBIR_PROJETOS);
 
@@ -119,7 +134,7 @@ export default function Projects() {
         </Fade>
       </div>
 
-      <div className="flex justify-center space-x-4 mt-0">
+      <div className="flex justify-center space-x-4 mt-6">
         <button
           onClick={handlePaginaAnterior}
           className={`px-4 py-2 rounded ${paginaAtual === 0 ? 'text-gray-400' : 'text-black'}`}

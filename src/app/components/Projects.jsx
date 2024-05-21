@@ -37,6 +37,22 @@ const projetos = [
     linkWebsite: "https://linktree.gilbertomorales.com",
     linkGithub: "https://github.com/eumorales/linktree"
   },
+  {
+    titulo: "Beba água",
+    descricao: "💧 Web app designed for easy monitoring of daily water consumption.",
+    caminhoImagem: "/assets/beba-agua-web.png",
+    tecnologias: ["html.svg", "css.svg", "javascript.svg"],
+    linkWebsite: "https://agua.gilbertomorales.com",
+    linkGithub: "https://github.com/eumorales/beba-agua"
+  },
+  {
+    titulo: "Habit log",
+    descricao: "🥗 The app that helps you track and conquer your daily habits!",
+    caminhoImagem: "/assets/habit-log-web.png",
+    tecnologias: ["html.svg", "css.svg", "javascript.svg"],
+    linkWebsite: "https://habitos.gilbertomorales.com",
+    linkGithub: "https://github.com/eumorales/habit-log"
+  },
 ];
 
 const EXIBIR_PROJETOS_MOBILE = 1;

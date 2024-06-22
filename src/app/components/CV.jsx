@@ -1,4 +1,5 @@
 import React from 'react';
+import { HiOutlineExternalLink } from "react-icons/hi";
 
 const CV = () => {
   const handleOpenPDF = () => {
@@ -8,7 +9,7 @@ const CV = () => {
 
   return (
     <button className="mt-5 btn btn-outline" onClick={handleOpenPDF}>
-      Open CV
+      <span></span>Open CV <HiOutlineExternalLink />
     </button>
   );
 };

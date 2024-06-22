@@ -151,7 +151,7 @@ export default function Projects() {
         </Fade>
       </div>
 
-      <div className="flex justify-center space-x-4 mt-6">
+      {/* <div className="flex justify-center space-x-4 mt-6">
         <button
           onClick={handlePaginaAnterior}
           className={`px-4 py-2 rounded ${paginaAtual === 0 ? 'text-gray-400' : 'text-black'}`}
@@ -166,7 +166,7 @@ export default function Projects() {
         >
           <FaArrowRight />
         </button>
-      </div>
+      </div> */}
     </div>
   );
 }

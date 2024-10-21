@@ -2,18 +2,14 @@
 import React, { useState, useEffect } from 'react';
 import { Cake, GithubLogo, Star, Headphones, Microphone, MusicNotes, Wrench } from '@phosphor-icons/react';
 
-// Dados de nascimento
 const dataNascimento = new Date('2004-06-01');
 
-// URL da API do GitHub
 const githubUrl = 'https://api.github.com/users/eumorales';
 
 const Stats = () => {
   const [idade, setIdade] = useState('...');
   const [repositorios, setRepositorios] = useState('...');
   const [estrelas, setEstrelas] = useState('...');
-
-  // Função para calcular a idade em tempo real
   useEffect(() => {
     const calcularIdade = () => {
       const agora = new Date();
@@ -49,22 +45,18 @@ const Stats = () => {
     return () => clearInterval(intervalo);
   }, []);
 
-  // Função para buscar dados do GitHub
   useEffect(() => {
     const carregarGitHub = async () => {
       try {
-        // Buscar informações do usuário
         const response = await fetch(githubUrl);
         if (!response.ok) throw new Error('Falha ao buscar dados do GitHub');
         const data = await response.json();
         setRepositorios(data.public_repos);
 
-        // Buscar todos os repositórios do usuário
         const reposResponse = await fetch(`${githubUrl}/repos?per_page=100`);
         if (!reposResponse.ok) throw new Error('Falha ao buscar repositórios');
         const reposData = await reposResponse.json();
 
-        // Somar as estrelas de todos os repositórios
         const totalStars = reposData.reduce((sum, repo) => sum + repo.stargazers_count, 0);
         setEstrelas(totalStars);
       } catch (error) {
@@ -77,14 +69,11 @@ const Stats = () => {
     carregarGitHub();
   }, []);
 
-  // Dados das estatísticas
   const estatisticas = [
     { label: 'My Age', valor: idade, icone: <Cake size={24} color="black" /> },
     { label: 'Github Repositories', valor: repositorios, icone: <GithubLogo size={24} color="black" />, link: 'https://github.com/eumorales' },
     { label: 'Github Stars', valor: estrelas, icone: <Star size={24} color="black" />, link: 'https://github.com/eumorales' },
-    { label: 'Listening', valor: 'Work in progress', icone: <MusicNotes size={24} color="black" />, isSpotify: true },
     { label: 'Top Artist', valor: 'Work in progress', icone: <Microphone size={24} color="black" />, isSpotify: true },
-    { label: 'Spotify Plays', valor: 'Work in progress', icone: <Headphones size={24} color="black" />, isSpotify: true }
   ];
 
   return (

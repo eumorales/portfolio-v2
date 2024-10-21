@@ -24,7 +24,7 @@ const About = () => {
             />
           </strong></h1>
           <h4 className="text-lg md:text-xl lg:text-2xl mt-5 text-black font-bold">Fullstack Developer</h4>
-          <p className="descricao mt-3 px-2 md:px-0 md:pr-6 text-gray-400">"I'm a fullstack developer focused on website development, constantly seeking new ways to enhance my skills."</p>
+          <p className="descricao mt-3 px-2 md:px-0 md:pr-6 text-gray-400">"I'm a Computer Science student who enjoys fullstack web development, always striving to improve my skills."</p>
           <CV />
 
         </div>

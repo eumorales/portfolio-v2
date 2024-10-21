@@ -56,7 +56,7 @@ const projetos = [
   },
 ];
 
-const EXIBIR_PROJETOS_MOBILE = 1;
+const EXIBIR_PROJETOS_MOBILE = 3;
 const EXIBIR_PROJETOS_DESKTOP = 3;
 
 export default function Projects() {

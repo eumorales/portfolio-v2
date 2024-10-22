@@ -8,7 +8,7 @@ const commitsUrl = 'https://api.github.com/search/commits?q=author:eumorales';
 const topArtistUrl = 'https://portfolio-backend-six-iota.vercel.app/api/artista';
 const topPlayedUrl = 'https://portfolio-backend-six-iota.vercel.app/api/maistocada';
 
-const gitToken = process.env.GITTOKEN;
+const gitToken = process.env.REACT_APP_GITTOKEN;
 
 const mesesIngles = [
   'January', 'February', 'March', 'April', 'May', 'June',

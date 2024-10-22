@@ -3,32 +3,26 @@ import React, { useState, useEffect } from 'react';
 import { Cake, GithubLogo, Star, Microphone, MusicNote, GitCommit } from '@phosphor-icons/react';
 import { Fade } from 'react-awesome-reveal';
 
-// Dados de nascimento
 const dataNascimento = new Date('2004-06-01');
 
-// URLs das APIs
 const githubUrl = 'https://api.github.com/users/eumorales';
 const commitsUrl = 'https://api.github.com/search/commits?q=author:eumorales';
 const topArtistUrl = 'https://portfolio-backend-six-iota.vercel.app/api/artista';
 const topPlayedUrl = 'https://portfolio-backend-six-iota.vercel.app/api/maistocada';
 
-// Token do GitHub da variável de ambiente
 const githubToken = process.env.NEXT_PUBLIC_GITHUB_TOKEN;
 
-// Função para obter o mês atual em inglês
 const mesesIngles = [
   'January', 'February', 'March', 'April', 'May', 'June',
   'July', 'August', 'September', 'October', 'November', 'December'
 ];
 const mesAtual = mesesIngles[new Date().getMonth()];
 
-// Função para salvar dados no localStorage com expiração
 const saveToLocalStorage = (key, data, expMinutes = 10) => {
   const expirationTime = new Date().getTime() + expMinutes * 60 * 1000;
   localStorage.setItem(key, JSON.stringify({ data, expirationTime }));
 };
 
-// Função para carregar dados do localStorage com verificação de expiração
 const loadFromLocalStorage = (key) => {
   const storedData = localStorage.getItem(key);
   if (!storedData) return null;
@@ -81,10 +75,8 @@ const Stats = () => {
     return () => clearInterval(intervalo);
   }, []);
 
-  // Função para buscar dados do GitHub com cache e expiração
   useEffect(() => {
     const carregarGitHub = async () => {
-      // Verificar o cache local
       const reposCache = loadFromLocalStorage('repositorios');
       const starsCache = loadFromLocalStorage('estrelas');
       if (reposCache && starsCache) {
@@ -94,7 +86,6 @@ const Stats = () => {
       }
 
       try {
-        // Buscar dados básicos do usuário
         const response = await fetch(githubUrl, {
           headers: {
             Authorization: `Bearer ${githubToken}`,
@@ -105,7 +96,6 @@ const Stats = () => {
         setRepositorios(data.public_repos);
         saveToLocalStorage('repositorios', data.public_repos);
 
-        // Buscar repositórios para calcular as estrelas
         const reposResponse = await fetch(`${githubUrl}/repos?per_page=100`, {
           headers: {
             Authorization: `Bearer ${githubToken}`,
@@ -131,7 +121,6 @@ const Stats = () => {
     carregarGitHub();
   }, []);
 
-  // Função para buscar o total de commits com cache e expiração
   useEffect(() => {
     const carregarCommits = async () => {
       const commitsCache = loadFromLocalStorage('totalCommits');
@@ -160,7 +149,6 @@ const Stats = () => {
     carregarCommits();
   }, []);
 
-  // Função para buscar dados do Spotify com cache e expiração
   useEffect(() => {
     const carregarSpotify = async () => {
       const artistCache = loadFromLocalStorage('topArtist');

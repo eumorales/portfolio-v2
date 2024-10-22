@@ -10,6 +10,10 @@ const topPlayedUrl = 'https://portfolio-backend-six-iota.vercel.app/api/maistoca
 
 const gitToken = process.env.REACT_APP_GITTOKEN;
 
+if (!gitToken) {
+  console.error('Token do GitHub não definido.');
+}
+
 const mesesIngles = [
   'January', 'February', 'March', 'April', 'May', 'June',
   'July', 'August', 'September', 'October', 'November', 'December'
@@ -55,83 +59,44 @@ const Stats = () => {
     return () => clearInterval(intervalo);
   }, []);
 
+  const carregarGitHubDados = async (url, headers, setFunc, setError) => {
+    try {
+      const response = await fetch(url, { headers });
+      if (!response.ok) throw new Error('Falha na requisição');
+      const data = await response.json();
+      setFunc(data);
+    } catch (error) {
+      console.error(error.message);
+      setError('Erro');
+    }
+  };
+
   useEffect(() => {
-    const carregarGitHub = async () => {
-      try {
-        const reposResponse = await fetch(reposUrl, {
-          headers: {
-            Authorization: `Bearer ${gitToken}`,
-          },
-        });
+    if (gitToken) {
+      const headers = { 'Authorization': `token ${gitToken}` };
 
-        if (!reposResponse.ok) throw new Error('Falha ao buscar repositórios');
-        const reposData = await reposResponse.json();
-
-        const totalStars = reposData.reduce((sum, repo) => sum + repo.stargazers_count, 0);
-        setRepositorios(reposData.length);
+      carregarGitHubDados(reposUrl, headers, (data) => {
+        const totalStars = data.reduce((sum, repo) => sum + repo.stargazers_count, 0);
+        setRepositorios(data.length);
         setEstrelas(totalStars);
-      } catch (error) {
-        console.error('Erro ao buscar repositórios e estrelas:', error);
-        setRepositorios('Erro');
-        setEstrelas('Erro');
-      }
-    };
+      }, setRepositorios);
 
-    carregarGitHub();
-  }, []);
-
-  useEffect(() => {
-    const carregarCommits = async () => {
-      try {
-        const response = await fetch(commitsUrl, {
-          headers: {
-            'Accept': 'application/vnd.github.cloak-preview',
-            Authorization: `Bearer ${gitToken}`,
-          },
-        });
-
-        if (!response.ok) throw new Error('Falha ao buscar os commits');
-        const data = await response.json();
+      carregarGitHubDados(commitsUrl, headers, (data) => {
         setCommits(data.total_count || 0);
-      } catch (error) {
-        console.error('Erro ao buscar os commits:', error);
-        setCommits('Erro');
-      }
-    };
+      }, setCommits);
+    }
+  }, [gitToken]);
 
-    carregarCommits();
+  useEffect(() => {
+    carregarGitHubDados(topArtistUrl, {}, (data) => {
+      setTopArtist({ name: data.topArtist, url: data.artistUrl });
+    }, setTopArtist);
   }, []);
 
   useEffect(() => {
-    const carregarTopArtist = async () => {
-      try {
-        const response = await fetch(topArtistUrl);
-        if (!response.ok) throw new Error('Falha ao buscar o artista mais ouvido.');
-        const data = await response.json();
-        setTopArtist({ name: data.topArtist, url: data.artistUrl });
-      } catch (error) {
-        console.error('Erro ao buscar o artista mais escutado:', error);
-        setTopArtist({ name: 'Não encontrado', url: '#' });
-      }
-    };
-
-    carregarTopArtist();
-  }, []);
-
-  useEffect(() => {
-    const carregarTopPlayed = async () => {
-      try {
-        const response = await fetch(topPlayedUrl);
-        if (!response.ok) throw new Error('Falha ao buscar a música mais tocada.');
-        const data = await response.json();
-        setTopPlayed({ name: data.topTrack, url: data.trackUrl });
-      } catch (error) {
-        console.error('Erro ao buscar a música mais tocada:', error);
-        setTopPlayed({ name: 'Não encontrada', url: '#' });
-      }
-    };
-
-    carregarTopPlayed();
+    carregarGitHubDados(topPlayedUrl, {}, (data) => {
+      setTopPlayed({ name: data.topTrack, url: data.trackUrl });
+    }, setTopPlayed);
   }, []);
 
   const estatisticas = [

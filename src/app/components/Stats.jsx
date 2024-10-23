@@ -5,34 +5,28 @@ import { Fade } from 'react-awesome-reveal';
 
 const dataNascimento = new Date('2004-06-01');
 
-const githubUrl = 'https://api.github.com/users/eumorales';
-const commitsUrl = 'https://api.github.com/search/commits?q=author:eumorales';
-const topArtistUrl = 'https://portfolio-backend-six-iota.vercel.app/api/artista';
-const topPlayedUrl = 'https://portfolio-backend-six-iota.vercel.app/api/maistocada';
+const urlGithub = 'https://api.github.com/users/eumorales';
+const urlCommits = 'https://api.github.com/search/commits?q=author:eumorales';
+const urlTopArtista = 'https://api.gilbertomorales.com/api/artista';
+const urlMaisTocada = 'https://api.gilbertomorales.com/api/maistocada';
 
-const githubToken = process.env.NEXT_PUBLIC_GITHUB_TOKEN;
+const tokenGithub = process.env.NEXT_PUBLIC_GITHUB_TOKEN;
 
-const mesesIngles = [
-  'January', 'February', 'March', 'April', 'May', 'June',
-  'July', 'August', 'September', 'October', 'November', 'December'
-];
-const mesAtual = mesesIngles[new Date().getMonth()];
-
-const saveToLocalStorage = (key, data, expMinutes = 10) => {
-  const expirationTime = new Date().getTime() + expMinutes * 60 * 1000;
-  localStorage.setItem(key, JSON.stringify({ data, expirationTime }));
+const salvarLocalStorage = (chave, dados, expMinutos = 10) => {
+  const tempoExpiracao = new Date().getTime() + expMinutos * 60 * 1000;
+  localStorage.setItem(chave, JSON.stringify({ dados, tempoExpiracao }));
 };
 
-const loadFromLocalStorage = (key) => {
-  const storedData = localStorage.getItem(key);
-  if (!storedData) return null;
+const carregarLocalStorage = (chave) => {
+  const dadosArmazenados = localStorage.getItem(chave);
+  if (!dadosArmazenados) return null;
 
-  const { data, expirationTime } = JSON.parse(storedData);
-  if (new Date().getTime() > expirationTime) {
-    localStorage.removeItem(key); // Remove o cache expirado
+  const { dados, tempoExpiracao } = JSON.parse(dadosArmazenados);
+  if (new Date().getTime() > tempoExpiracao) {
+    localStorage.removeItem(chave);
     return null;
   }
-  return data;
+  return dados;
 };
 
 const Stats = () => {
@@ -40,10 +34,9 @@ const Stats = () => {
   const [repositorios, setRepositorios] = useState('...');
   const [estrelas, setEstrelas] = useState('...');
   const [totalCommits, setTotalCommits] = useState('...');
-  const [topArtist, setTopArtist] = useState({ name: '...', url: '#' });
-  const [topPlayed, setTopPlayed] = useState({ name: '...', url: '#' });
-
-  // Função para calcular a idade em tempo real
+  const [topArtista, setTopArtista] = useState({ nome: '...', url: '#' });
+  const [maisTocada, setMaisTocada] = useState({ nome: '...', url: '#' });
+  
   useEffect(() => {
     const calcularIdade = () => {
       const agora = new Date();
@@ -59,7 +52,7 @@ const Stats = () => {
       return (
         <span className="text-lg font-semibold">
           <span className="text-gray-800">{anos}y </span>
-          <span className="text-gray-500">
+          <span className="text-gray-500 text-sm">
             {meses}mo {dias}d {horas}h {minutos}min {segundos}s
           </span>
         </span>
@@ -76,73 +69,73 @@ const Stats = () => {
   }, []);
 
   useEffect(() => {
-    const carregarGitHub = async () => {
-      const reposCache = loadFromLocalStorage('repositorios');
-      const starsCache = loadFromLocalStorage('estrelas');
-      if (reposCache && starsCache) {
-        setRepositorios(reposCache);
-        setEstrelas(starsCache);
+    const carregarGithub = async () => {
+      const cacheRepos = carregarLocalStorage('repositorios');
+      const cacheEstrelas = carregarLocalStorage('estrelas');
+      if (cacheRepos && cacheEstrelas) {
+        setRepositorios(cacheRepos);
+        setEstrelas(cacheEstrelas);
         return;
       }
 
       try {
-        const response = await fetch(githubUrl, {
+        const resposta = await fetch(urlGithub, {
           headers: {
-            Authorization: `Bearer ${githubToken}`,
+            Authorization: `Bearer ${tokenGithub}`,
           },
         });
-        if (!response.ok) throw new Error('Falha ao buscar dados do GitHub');
-        const data = await response.json();
-        setRepositorios(data.public_repos);
-        saveToLocalStorage('repositorios', data.public_repos);
+        if (!resposta.ok) throw new Error('Falha ao buscar dados do GitHub');
+        const dados = await resposta.json();
+        setRepositorios(dados.public_repos);
+        salvarLocalStorage('repositorios', dados.public_repos);
 
-        const reposResponse = await fetch(`${githubUrl}/repos?per_page=100`, {
+        const respostaRepos = await fetch(`${urlGithub}/repos?per_page=100`, {
           headers: {
-            Authorization: `Bearer ${githubToken}`,
+            Authorization: `Bearer ${tokenGithub}`,
           },
         });
-        if (!reposResponse.ok) throw new Error('Falha ao buscar repositórios');
-        const reposData = await reposResponse.json();
+        if (!respostaRepos.ok) throw new Error('Falha ao buscar repositórios');
+        const dadosRepos = await respostaRepos.json();
 
-        let totalStars = 0;
-        for (const repo of reposData) {
-          totalStars += repo.stargazers_count;
+        let totalEstrelas = 0;
+        for (const repo of dadosRepos) {
+          totalEstrelas += repo.stargazers_count;
         }
 
-        setEstrelas(totalStars);
-        saveToLocalStorage('estrelas', totalStars);
+        setEstrelas(totalEstrelas);
+        salvarLocalStorage('estrelas', totalEstrelas);
       } catch (error) {
         console.error('Erro ao buscar dados do GitHub:', error);
-        setRepositorios('Erro');
-        setEstrelas('Erro');
+        setRepositorios('...');
+        setEstrelas('...');
       }
     };
 
-    carregarGitHub();
+    carregarGithub();
   }, []);
 
   useEffect(() => {
     const carregarCommits = async () => {
-      const commitsCache = loadFromLocalStorage('totalCommits');
-      if (commitsCache) {
-        setTotalCommits(commitsCache);
+      const cacheCommits = carregarLocalStorage('totalCommits');
+      if (cacheCommits) {
+        setTotalCommits(cacheCommits);
         return;
       }
 
       try {
-        const response = await fetch(commitsUrl, {
+        const resposta = await fetch(urlCommits, {
           headers: {
-            Authorization: `Bearer ${githubToken}`,
+            Authorization: `Bearer ${tokenGithub}`,
             'Accept': 'application/vnd.github.cloak-preview',
           },
         });
-        if (!response.ok) throw new Error('Falha ao buscar os commits');
-        const data = await response.json();
-        setTotalCommits(data.total_count || 0);
-        saveToLocalStorage('totalCommits', data.total_count || 0);
+        if (!resposta.ok) throw new Error('Falha ao buscar os commits');
+        const dados = await resposta.json();
+        setTotalCommits(dados.total_count || 0);
+        salvarLocalStorage('totalCommits', dados.total_count || 0);
       } catch (error) {
         console.error('Erro ao buscar os commits:', error);
-        setTotalCommits('Erro');
+        setTotalCommits('...');
       }
     };
 
@@ -151,33 +144,33 @@ const Stats = () => {
 
   useEffect(() => {
     const carregarSpotify = async () => {
-      const artistCache = loadFromLocalStorage('topArtist');
-      const playedCache = loadFromLocalStorage('topPlayed');
+      const cacheArtista = carregarLocalStorage('topArtista');
+      const cacheTocada = carregarLocalStorage('maisTocada');
 
-      if (artistCache && playedCache) {
-        setTopArtist(artistCache);
-        setTopPlayed(playedCache);
+      if (cacheArtista && cacheTocada) {
+        setTopArtista(cacheArtista);
+        setMaisTocada(cacheTocada);
         return;
       }
 
       try {
-        const topArtistResponse = await fetch(topArtistUrl);
-        if (!topArtistResponse.ok) throw new Error('Falha ao buscar artista mais escutado');
-        const artistData = await topArtistResponse.json();
-        const newTopArtist = { name: artistData.topArtist, url: artistData.artistUrl };
-        setTopArtist(newTopArtist);
-        saveToLocalStorage('topArtist', newTopArtist);
+        const respostaArtista = await fetch(urlTopArtista);
+        if (!respostaArtista.ok) throw new Error('Falha ao buscar artista mais escutado');
+        const dadosArtista = await respostaArtista.json();
+        const novoTopArtista = { nome: dadosArtista.topArtist, url: dadosArtista.artistUrl };
+        setTopArtista(novoTopArtista);
+        salvarLocalStorage('topArtista', novoTopArtista);
 
-        const topPlayedResponse = await fetch(topPlayedUrl);
-        if (!topPlayedResponse.ok) throw new Error('Falha ao buscar música mais tocada');
-        const playedData = await topPlayedResponse.json();
-        const newTopPlayed = { name: playedData.topTrack, url: playedData.trackUrl };
-        setTopPlayed(newTopPlayed);
-        saveToLocalStorage('topPlayed', newTopPlayed);
+        const respostaTocada = await fetch(urlMaisTocada);
+        if (!respostaTocada.ok) throw new Error('Falha ao buscar música mais tocada');
+        const dadosTocada = await respostaTocada.json();
+        const novaMaisTocada = { nome: dadosTocada.topTrack, url: dadosTocada.trackUrl };
+        setMaisTocada(novaMaisTocada);
+        salvarLocalStorage('maisTocada', novaMaisTocada);
       } catch (error) {
         console.error('Erro ao buscar dados do Spotify:', error);
-        setTopArtist({ name: 'Não encontrado', url: '#' });
-        setTopPlayed({ name: 'Não encontrada', url: '#' });
+        setTopArtista({ nome: 'Não encontrado', url: '#' });
+        setMaisTocada({ nome: 'Não encontrada', url: '#' });
       }
     };
 
@@ -186,8 +179,8 @@ const Stats = () => {
 
   const estatisticas = [
     { label: 'My Age', valor: idade, icone: <Cake size={24} color="black" /> },
-    { label: `Top Artist (${mesAtual})`, valor: topArtist.name, icone: <Microphone size={24} color="black" />, link: topArtist.url },
-    { label: `Top Played (${mesAtual})`, valor: topPlayed.name, icone: <MusicNote size={24} color="black" />, link: topPlayed.url },
+    { label: 'Top Artist', valor: topArtista.nome, icone: <Microphone size={24} color="black" />, link: topArtista.url },
+    { label: 'Top Played', valor: maisTocada.nome, icone: <MusicNote size={24} color="black" />, link: maisTocada.url },
     { label: 'Github Repositories', valor: repositorios, icone: <GithubLogo size={24} color="black" />, link: 'https://github.com/eumorales' },
     { label: 'Github Stars', valor: estrelas, icone: <Star size={24} color="black" />, link: 'https://github.com/eumorales' },
     { label: 'Total Commits', valor: totalCommits, icone: <GitCommit size={24} color="black" /> },
